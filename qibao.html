@@ -1,878 +1,203 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alex Chen - 个人作品集</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* 全局样式 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        :root {
-            --primary: #4e54c8;
-            --secondary: #6a11cb;
-            --accent: #ff6b6b;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --gray: #6c757d;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: var(--dark);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        section {
-            padding: 80px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-            position: relative;
-        }
-        
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-        
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 12px 28px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-        }
-        
-        /* 导航栏样式 */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            backdrop-filter: blur(10px);
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-decoration: none;
-        }
-        
-        .logo span {
-            color: var(--secondary);
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-        
-        .nav-links li {
-            margin-left: 30px;
-        }
-        
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            bottom: -5px;
-            left: 0;
-            transition: width 0.3s ease;
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
-        .hamburger {
-            display: none;
-            cursor: pointer;
-        }
-        
-        /* Hero 区域样式 */
-        #hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            padding-top: 80px;
-        }
-        
-        .hero-content {
-            max-width: 600px;
-            z-index: 2;
-        }
-        
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            color: var(--dark);
-            line-height: 1.2;
-        }
-        
-        .hero-content h1 span {
-            color: var(--primary);
-        }
-        
-        .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            color: var(--gray);
-        }
-        
-        .hero-image {
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 50%;
-            max-width: 600px;
-            z-index: 1;
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(-50%) translateX(0); }
-            50% { transform: translateY(-55%) translateX(10px); }
-            100% { transform: translateY(-50%) translateX(0); }
-        }
-        
-        /* 关于我区域样式 */
-        #about {
-            background-color: white;
-        }
-        
-        .about-content {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-        }
-        
-        .about-text {
-            flex: 1;
-        }
-        
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-        
-        .about-text p {
-            margin-bottom: 20px;
-        }
-        
-        .skills {
-            margin-top: 30px;
-        }
-        
-        .skill-bar {
-            margin-bottom: 15px;
-        }
-        
-        .skill-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 5px;
-        }
-        
-        .skill-progress {
-            height: 10px;
-            background: #e9ecef;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-        
-        .skill-progress span {
-            display: block;
-            height: 100%;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            border-radius: 5px;
-        }
-        
-        .about-image {
-            flex: 1;
-            text-align: center;
-        }
-        
-        .about-image img {
-            max-width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
-        
-        /* 项目区域样式 */
-        #projects {
-            background-color: #f8f9fa;
-        }
-        
-        .projects-filter {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 40px;
-        }
-        
-        .filter-btn {
-            padding: 8px 20px;
-            margin: 5px;
-            background: white;
-            border: 2px solid #e9ecef;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-        
-        .filter-btn.active, .filter-btn:hover {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
-            border-color: transparent;
-        }
-        
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-        }
-        
-        .project-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-        
-        .project-img {
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .project-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .project-card:hover .project-img img {
-            transform: scale(1.1);
-        }
-        
-        .project-content {
-            padding: 25px;
-        }
-        
-        .project-content h3 {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
-            color: var(--dark);
-        }
-        
-        .project-content p {
-            color: var(--gray);
-            margin-bottom: 20px;
-        }
-        
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-        
-        .project-tags span {
-            padding: 5px 12px;
-            background: #e9ecef;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-right: 8px;
-            margin-bottom: 8px;
-        }
-        
-        /* 联系区域样式 */
-        #contact {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            position: relative;
-        }
-        
-        #contact .section-title h2 {
-            color: white;
-        }
-        
-        .contact-container {
-            display: flex;
-            gap: 50px;
-        }
-        
-        .contact-info {
-            flex: 1;
-        }
-        
-        .contact-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 25px;
-        }
-        
-        .contact-icon {
-            font-size: 1.5rem;
-            margin-right: 15px;
-            color: var(--accent);
-        }
-        
-        .contact-details h4 {
-            margin-bottom: 5px;
-            font-size: 1.1rem;
-        }
-        
-        .contact-form {
-            flex: 1;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border: none;
-            border-radius: 5px;
-            background: rgba(255, 255, 255, 0.9);
-            font-size: 1rem;
-        }
-        
-        textarea.form-control {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        /* 页脚样式 */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 40px 0 20px;
-            text-align: center;
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-        
-        .social-link {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 10px;
-            color: white;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-        
-        .social-link:hover {
-            background: var(--primary);
-            transform: translateY(-5px);
-        }
-        
-        .copyright {
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.6);
-        }
-        
-        /* 响应式设计 */
-        @media (max-width: 992px) {
-            .hero-content {
-                max-width: 100%;
-                text-align: center;
-            }
-            
-            .hero-image {
-                position: relative;
-                width: 100%;
-                max-width: 500px;
-                margin: 40px auto 0;
-                transform: none;
-                animation: none;
-            }
-            
-            .about-content {
-                flex-direction: column;
-            }
-            
-            .contact-container {
-                flex-direction: column;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 80px);
-                background: white;
-                flex-direction: column;
-                align-items: center;
-                padding-top: 50px;
-                transition: all 0.5s ease;
-            }
-            
-            .nav-links.active {
-                left: 0;
-            }
-            
-            .nav-links li {
-                margin: 15px 0;
-            }
-            
-            .hamburger {
-                display: block;
-            }
-            
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-            
-            .section-title h2 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>服务收款平台</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #121212;
+      color: #f5f5f5;
+    }
+    header, footer {
+      background-color: #1e1e1e;
+      text-align: center;
+      padding: 1rem;
+    }
+    .lang-switch {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: #00ffc8;
+      color: #000;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin: 0.5rem auto;
+    }
+    .intro {
+      font-size: 0.95rem;
+      color: #ccc;
+    }
+    .search-box input {
+      width: 80%;
+      max-width: 400px;
+      padding: 0.5rem;
+      border-radius: 6px;
+      border: none;
+      background-color: #2c2c2c;
+      color: white;
+      margin: 1rem auto;
+      display: block;
+    }
+    .services {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 1rem;
+      gap: 1rem;
+    }
+    .card {
+      background-color: #1c1c1c;
+      padding: 1rem;
+      border-radius: 10px;
+      width: 280px;
+      text-align: center;
+      border: 1px solid #333;
+    }
+    .card h2 {
+      color: #00ffc8;
+    }
+    .price {
+      color: #ffd700;
+      margin: 0.5rem 0;
+    }
+    .card button {
+      background-color: #00ffc8;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      backdrop-filter: blur(5px);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #222;
+      padding: 2rem;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .modal-content img {
+      width: 200px;
+      height: 200px;
+    }
+    .modal-content p {
+      color: #aaa;
+    }
+    .contact-info {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: #888;
+    }
+  </style>
 </head>
 <body>
-    <!-- 导航栏 -->
-    <header>
-        <div class="container">
-            <nav>
-                <a href="#" class="logo">Alex<span>Chen</span></a>
-                <ul class="nav-links">
-                    <li><a href="#hero">首页</a></li>
-                    <li><a href="#about">关于我</a></li>
-                    <li><a href="#projects">项目</a></li>
-                    <li><a href="#contact">联系我</a></li>
-                </ul>
-                <div class="hamburger">
-                    <i class="fas fa-bars"></i>
-                </div>
-            </nav>
-        </div>
-    </header>
+  <button class="lang-switch" onclick="toggleLang()">EN</button>
+  <header>
+    <img src="touxiang.jpg" class="avatar" alt="头像">
+    <h1 id="title">七宝の服务平台</h1>
+    <p class="intro" id="desc">提供AI、开发、技术教学等服务</p>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="搜索服务...">
+    </div>
+  </header>
 
-    <!-- Hero 区域 -->
-    <section id="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>你好，我是 <span>Alex Chen</span><br>前端开发工程师</h1>
-                <p>我专注于创建美观、用户友好的网站和应用程序。通过创新设计和精湛技术，将想法转化为现实。</p>
-                <a href="#projects" class="btn">查看我的作品</a>
-            </div>
-            <div class="hero-image">
-                <svg viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg">
-                    <path fill="#4e54c8" d="M0,400 Q300,350 600,400 L600,0 Q300,0 0,0 Z"></path>
-                    <circle cx="300" cy="200" r="120" fill="#ff6b6b" opacity="0.8"/>
-                    <circle cx="250" cy="180" r="40" fill="white"/>
-                    <circle cx="350" cy="180" r="40" fill="white"/>
-                    <circle cx="250" cy="180" r="15" fill="#4e54c8"/>
-                    <circle cx="350" cy="180" r="15" fill="#4e54c8"/>
-                    <path d="M220,260 Q300,290 380,260" stroke="white" stroke-width="10" fill="none" stroke-linecap="round"/>
-                </svg>
-            </div>
-        </div>
-    </section>
+  <div class="services" id="servicesList">
+    <div class="card" data-title="刷机root">
+      <h2 data-zh="刷机root" data-en="System Flashing">刷机root</h2>
+      <p data-zh="MIUI系统" data-en="MIUI System Unlocking & Root">MIUI系统</p>
+      <div class="price">¥20+</div>
+      <button onclick="pay('刷机root')">付款</button>
+    </div>
+    <div class="card" data-title="环境检测">
+      <h2 data-zh="环境检测" data-en="Environment Check">环境检测</h2>
+      <p data-zh="五系内核以上过牛头30" data-en="Kernel v5+ Device Check & Bypass">过牛头30</p>
+      <div class="price">25+</div>
+      <button onclick="pay('环境检测')">付款</button>
+    </div>
+    <div class="card" data-title="咨询服务">
+      <h2 data-zh="咨询服务" data-en="Consulting Service">咨询服务</h2>
+      <p data-zh="1小时咨询＋解决方案" data-en="1hr Technical Consulting + Solution">1小时咨询＋解决方案</p>
+      <div class="price">¥6</div>
+      <button onclick="pay('咨询服务')">付款</button>
+    </div>
+    <div class="card" data-title="无偿捐赠">
+      <h2 data-zh="无偿捐赠" data-en="Donation">无偿捐赠</h2>
+      <p data-zh="请七宝吃阿尔卑斯棒棒糖" data-en="Buy Qibao a lollipop">请七宝吃阿尔卑斯棒棒糖</p>
+      <div class="price">¥1+</div>
+      <button onclick="pay('无偿捐赠')">付款</button>
+    </div>
+  </div>
 
-    <!-- 关于我区域 -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>关于我</h2>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>前端开发者 & UI设计师</h3>
-                    <p>我是一名充满激情的前端开发者和UI设计师，拥有5年行业经验。我专注于创建响应式、用户友好且高性能的网站和应用程序。</p>
-                    <p>我擅长将复杂的设计转化为简洁、高效的代码，同时确保最佳的用户体验。我的工作方法注重细节，并始终关注最新的行业趋势和技术。</p>
-                    
-                    <div class="skills">
-                        <div class="skill-bar">
-                            <div class="skill-info">
-                                <span>HTML/CSS</span>
-                                <span>95%</span>
-                            </div>
-                            <div class="skill-progress">
-                                <span style="width: 95%"></span>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-bar">
-                            <div class="skill-info">
-                                <span>JavaScript</span>
-                                <span>90%</span>
-                            </div>
-                            <div class="skill-progress">
-                                <span style="width: 90%"></span>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-bar">
-                            <div class="skill-info">
-                                <span>React</span>
-                                <span>85%</span>
-                            </div>
-                            <div class="skill-progress">
-                                <span style="width: 85%"></span>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-bar">
-                            <div class="skill-info">
-                                <span>UI/UX设计</span>
-                                <span>80%</span>
-                            </div>
-                            <div class="skill-progress">
-                                <span style="width: 80%"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Alex Chen">
-                </div>
-            </div>
-        </div>
-    </section>
+  <div class="modal" id="paymentModal">
+    <div class="modal-content">
+      <h2 data-zh="请使用支付宝扫码支付" data-en="Please use Alipay to scan the code to pay.">请使用支付宝扫码支付</h2>
+      <img src="zfb.png" alt="二维码">
+      <p id="orderText">订单号：</p>
+      <p data-zh="支付后请截图并通过微信发送付款凭证" data-en="Please screenshot and send payment proof via WeChat">支付后请截图并通过微信发送付款凭证</p>
+      <p data-zh="微信：liuyujia051227" data-en="WeChat: liuyujia051227">微信：liuyujia051227</p>
+      <button onclick="closeModal()">关闭</button>
+    </div>
+  </div>
 
-    <!-- 项目区域 -->
-    <section id="projects">
-        <div class="container">
-            <div class="section-title">
-                <h2>我的项目</h2>
-            </div>
-            
-            <div class="projects-filter">
-                <button class="filter-btn active">全部</button>
-                <button class="filter-btn">网页设计</button>
-                <button class="filter-btn">移动应用</button>
-                <button class="filter-btn">UI/UX</button>
-            </div>
-            
-            <div class="projects-grid">
-                <!-- 项目 1 -->
-                <div class="project-card">
-                    <div class="project-img">
-                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1674&q=80" alt="电子商务网站">
-                    </div>
-                    <div class="project-content">
-                        <h3>时尚电子商务平台</h3>
-                        <p>一个现代化的电子商务网站，为时尚品牌提供完整的在线购物体验，包含产品展示、购物车和结账系统。</p>
-                        <div class="project-tags">
-                            <span>React</span>
-                            <span>Node.js</span>
-                            <span>MongoDB</span>
-                            <span>支付集成</span>
-                        </div>
-                        <a href="#" class="btn">查看详情</a>
-                    </div>
-                </div>
-                
-                <!-- 项目 2 -->
-                <div class="project-card">
-                    <div class="project-img">
-                        <img src="https://images.unsplash.com/photo-1581276879432-15e50529f34b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="健康应用">
-                    </div>
-                    <div class="project-content">
-                        <h3>健康追踪移动应用</h3>
-                        <p>一款帮助用户追踪健康指标、记录运动和饮食习惯的移动应用，包含数据可视化和个性化建议功能。</p>
-                        <div class="project-tags">
-                            <span>React Native</span>
-                            <span>Firebase</span>
-                            <span>数据可视化</span>
-                            <span>健康API</span>
-                        </div>
-                        <a href="#" class="btn">查看详情</a>
-                    </div>
-                </div>
-                
-                <!-- 项目 3 -->
-                <div class="project-card">
-                    <div class="project-img">
-                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1715&q=80" alt="金融仪表盘">
-                    </div>
-                    <div class="project-content">
-                        <h3>金融分析仪表盘</h3>
-                        <p>为金融分析师设计的实时数据仪表盘，展示市场趋势、投资组合表现和关键指标。</p>
-                        <div class="project-tags">
-                            <span>Vue.js</span>
-                            <span>D3.js</span>
-                            <span>实时数据</span>
-                            <span>金融API</span>
-                        </div>
-                        <a href="#" class="btn">查看详情</a>
-                    </div>
-                </div>
-                
-                <!-- 项目 4 -->
-                <div class="project-card">
-                    <div class="project-img">
-                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="教育平台">
-                    </div>
-                    <div class="project-content">
-                        <h3>在线学习平台</h3>
-                        <p>一个综合性的在线教育平台，提供课程管理、视频教学、测验和进度追踪功能。</p>
-                        <div class="project-tags">
-                            <span>Angular</span>
-                            <span>Express</span>
-                            <span>MongoDB</span>
-                            <span>视频流</span>
-                        </div>
-                        <a href="#" class="btn">查看详情</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <footer>
+    <div>© 2025 七宝工作室</div>
+    <div class="contact-info" data-zh="微信：liuyujia051227 | QQ: 2789151911 | 邮箱：2789151911@qq.com" data-en="WeChat: liuyujia051227 | TG: @qibao123456 | Email: 2789151911@qq.com">微信：liuyujia051227 | QQ：2789151911 | 邮箱：2789151911@qq.com</div>
+  </footer>
 
-    <!-- 联系区域 -->
-    <section id="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>联系我</h2>
-            </div>
-            
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h3>随时联系</h3>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>地址</h4>
-                            <p>上海市浦东新区张江高科技园区</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>邮箱</h4>
-                            <p>alex.chen@example.com</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>电话</h4>
-                            <p>+86 138 8888 8888</p>
-                        </div>
-                    </div>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h4>工作时间</h4>
-                            <p>周一至周五: 9:00 - 18:00</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="contact-form">
-                    <form>
-                        <div class="form-group">
-                            <label for="name">姓名</label>
-                            <input type="text" id="name" class="form-control" placeholder="请输入您的姓名">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">邮箱</label>
-                            <input type="email" id="email" class="form-control" placeholder="请输入您的邮箱">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="subject">主题</label>
-                            <input type="text" id="subject" class="form-control" placeholder="请输入主题">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">消息</label>
-                            <textarea id="message" class="form-control" placeholder="请输入您的消息"></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn">发送消息</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+  <script>
+    const modal = document.getElementById('paymentModal');
+    const orderText = document.getElementById('orderText');
 
-    <!-- 页脚 -->
-    <footer>
-        <div class="container">
-            <div class="social-links">
-                <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-dribbble"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-behance"></i></a>
-            </div>
-            
-            <div class="copyright">
-                <p>&copy; 2023 Alex Chen. 保留所有权利。</p>
-            </div>
-        </div>
-    </footer>
+    function pay(serviceName) {
+      const orderId = 'QB-' + Date.now().toString(36).toUpperCase();
+      orderText.textContent = `订单号：${orderId} (${serviceName})`;
+      modal.style.display = 'flex';
+    }
 
-    <script>
-        // 导航菜单切换
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            hamburger.querySelector('i').classList.toggle('fa-bars');
-            hamburger.querySelector('i').classList.toggle('fa-times');
-        });
-        
-        // 平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                navLinks.classList.remove('active');
-                hamburger.querySelector('i').classList.add('fa-bars');
-                hamburger.querySelector('i').classList.remove('fa-times');
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-        
-        // 项目过滤功能
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // 移除所有按钮的active类
-                filterBtns.forEach(b => b.classList.remove('active'));
-                // 为当前点击的按钮添加active类
-                btn.classList.add('active');
-                
-                // 这里可以添加实际的项目过滤逻辑
-            });
-        });
-        
-        // 页面滚动效果
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            header.classList.toggle('scrolled', window.scrollY > 100);
-        });
-    </script>
+    function closeModal() {
+      modal.style.display = 'none';
+    }
+
+    window.onclick = (e) => {
+      if (e.target === modal) closeModal();
+    };
+
+    document.getElementById('searchInput').addEventListener('input', function() {
+      const val = this.value.toLowerCase();
+      document.querySelectorAll('.card').forEach(card => {
+        const title = card.dataset.title.toLowerCase();
+        card.style.display = title.includes(val) ? 'block' : 'none';
+      });
+    });
+
+    let isZh = true;
+    function toggleLang() {
+      isZh = !isZh;
+      document.querySelector('.lang-switch').textContent = isZh ? 'EN' : '中';
+      document.getElementById('title').textContent = isZh ? '七宝の服务平台' : "Qibao's Service Portal";
+      document.getElementById('desc').textContent = isZh ? '提供AI、开发、技术教学等服务' : 'AI, Dev, Teaching Services';
+
+      document.querySelectorAll('[data-en][data-zh]').forEach(el => {
+        el.textContent = isZh ? el.dataset.zh : el.dataset.en;
+      });
+    }
+  </script>
 </body>
 </html>
